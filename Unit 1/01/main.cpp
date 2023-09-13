@@ -53,7 +53,7 @@ int main() {
     printf("\e[H\e[JWelcome to the test. There are %u questions. \n\n", NUM_QUESTIONS);
     for (int i = 0; i < NUM_QUESTIONS; ++i) askquestion(i);
     printf("Mark breakdown:\n");
-    for (int i = 0; i < NUM_QUESTIONS; ++i) {\
+    for (int i = 0; i < NUM_QUESTIONS; ++i) {
         bool right = (answers[i] - 0x61 == correct[i]);
         printf("Your answer: %c\n%s\n",answers[i], right ? "Correct!" : "Incorrect!");
         if (right) numright++;
