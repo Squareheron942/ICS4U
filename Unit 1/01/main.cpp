@@ -1,8 +1,13 @@
 #include <iostream>
-#include <string.h>
 
 #define NUM_QUESTIONS 10
 #define MAX_CHOICES 5
+#define INDEX(el, arr) (&el - arr)
+#define TO_INT(c) (c - 0x61)
+#define TO_LETTER(c) (c + 0x61)
+#define RESET "\e[0m"
+#define RED "\e[31m"
+#define GREEN "\e[32m"
 
 static const char* questions[NUM_QUESTIONS] = {
     "What is the entry method of a c++ file?",
@@ -31,21 +36,38 @@ static const char* choices[NUM_QUESTIONS][MAX_CHOICES] = {
 };
 
 static const char correct[NUM_QUESTIONS] = {1, 0, 0, 1, 4, 1, 2, 1, 0, 0};
-
 static char answers[NUM_QUESTIONS] = { 0 };
-
 static std::string answer;
 
 // bool getline(char* &line) { std::cin >> line;return true; }
 
+bool askquestion(int index);
+void doSomethingFun(void);
+
+int main() {
+    int numright(0);
+    printf("\e[H\e[JWelcome to the test. There are %u questions. \n\n", NUM_QUESTIONS);
+    for (int i = 0; i < NUM_QUESTIONS; ++i) askquestion(i);
+    printf("Mark breakdown:\n");
+    for (auto &c : answers) {
+        bool right = {TO_INT(c) == correct[INDEX(c, answers)]};
+        printf("\nQuestion %lu: %s\nYour answer: %c\n%s%s%s\n", INDEX(c, answers), questions[INDEX(c, answers)], c, right ? GREEN : RED, right ? "Correct!" : "Incorrect!", RESET);
+        if (right) ++numright; else printf("Correct answer: %c\n", TO_LETTER(correct[INDEX(c, answers)]));
+    }
+    printf("Score: %u/%u\n", numright, NUM_QUESTIONS);
+    
+    if (numright == NUM_QUESTIONS) doSomethingFun(); else printf("If you did perfect maybe you could have done something more interesting...");
+    return 0;
+}
+
 bool askquestion(int index) {
     char i = 0;
     printf("%u. %s\n\n", index + 1, questions[index]);
-    do {printf("    %c. %s\n", i + 0x61, choices[index][i]);} while (choices[index][++i] && i < MAX_CHOICES);
+    do {printf("    %c. %s\n", TO_LETTER(i), choices[index][i]);} while (choices[index][++i] && i < MAX_CHOICES);
     printf("\n");
-    do {printf("\e[1A\e[0K");getline(std::cin, answer);} while (answer.c_str()[0] < 0x61 || answer.c_str()[0] > 0x61 + MAX_CHOICES);
+    do {printf("\e[1A\e[0K");getline(std::cin, answer);} while (answer.c_str()[0] < 0x61 || answer.c_str()[0] > 0x60 + i);
     answers[index] = answer.c_str()[0];
-    return ((answer.c_str()[0] - 0x61) == correct[index]);
+    return ((TO_INT(answer.c_str()[0])) == correct[index]);
 }
 
 void doSomethingFun(void) {
@@ -54,6 +76,7 @@ void doSomethingFun(void) {
     printf("Enter the number of items in a char array\n");
     getline(std::cin, numItems);
     items = new char[std::stoi(numItems)];
+    printf("Enter the items in the array\n");
     for (int i = 0; i < std::stoi(numItems); ++i) {
         getline(std::cin, item);
         items[i] = item.c_str()[0];
@@ -62,20 +85,4 @@ void doSomethingFun(void) {
     do {printf("\e[1A\e[0K");getline(std::cin, item);} while (std::stoi(item) >= std::stoi(numItems));
     printf("Output text: %s\n\nYou just did some pointer arithmetic!(and almost caused a segmentation fault)", items + std::stoi(item)); // add offset to pointer
     delete[] items;
-}
-
-int main() {
-    int numright = 0;
-    printf("\e[H\e[JWelcome to the test. There are %u questions. \n\n", NUM_QUESTIONS);
-    for (int i = 0; i < NUM_QUESTIONS; ++i) askquestion(i);
-    printf("Mark breakdown:\n");
-    for (int i = 0; i < NUM_QUESTIONS; ++i) {
-        bool right = (answers[i] - 0x61 == correct[i]);
-        printf("Your answer: %c\n%s\n",answers[i], right ? "Correct!" : "Incorrect!");
-        if (right) numright++; else printf("Correct answer: %c\n", correct[i] + 0x61);
-    }
-    printf("Score: %u/%u\n", numright, NUM_QUESTIONS);
-    
-    if (numright == NUM_QUESTIONS) doSomethingFun(); else printf("If you did perfect maybe you could have done something more interesting...");
-    return 0;
 }
