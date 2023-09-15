@@ -75,7 +75,7 @@ namespace randnum {
         // 0xAAAABBBBCCCCDDDD ==> 0xDDDDAAAABBBBCCCC
         unsigned long time = (t << 48) | (t >> 16);
         T out = 1;
-        unsigned long val = xorshf(time  seed);
+        unsigned long val = xorshf(time * seed);
         if constexpr (std::integral<T>) out = (T)val;
         else out = (T)to_double(val);
         state = val;
