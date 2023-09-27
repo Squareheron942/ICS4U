@@ -53,8 +53,8 @@ void q1d() {
     alloc(&arr2, size2);
     alloc(&arr3, size1 + size2);
     
-    memcpy(&arr3, &arr1, sizeof(int) * size1);
-    memcpy(&arr3, &arr2 + sizeof(int) * size1, sizeof(int) * size2);
+    memcpy(arr3, &arr1, sizeof(int) * size1);
+    memcpy(&arr3[size1], &arr2, sizeof(int) * size2);
 
     delete[] arr1;
     delete[] arr2;
