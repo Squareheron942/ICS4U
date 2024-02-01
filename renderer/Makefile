@@ -7,7 +7,6 @@ CFLAGS   := -I/usr/local/include/SDL2 -D_THREAD_SAFE -flto
 CXXFLAGS := $(CFLAGS) -std=c++20 -msse4.1 -O2 -ffast-math
 EXTTOOL  :=
 LIBS     := -L/usr/local/lib -lSDL2
-CXX      := g++-13
 
 
 

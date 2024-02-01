@@ -2,7 +2,8 @@
 #include <iostream>
 
 std::string decimalToBinary(int n) {
-    return (n > 1 ? decimalToBinary(n >> 1) + std::to_string(n % 2) : std::to_string(n % 2));
+    // adds a 0 or 1 to the output string based on the remainder of division
+    return (n > 1 ? decimalToBinary(n >> 1) + std::to_string(n % 2) : std::to_string(n));
 }
 
 int main() {
