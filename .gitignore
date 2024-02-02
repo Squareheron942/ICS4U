@@ -33,3 +33,6 @@
 
 # VSCode Folder
 .vscode/
+
+# macOS file stuff
+.DS_Store

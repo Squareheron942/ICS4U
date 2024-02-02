@@ -31,7 +31,7 @@ int main() {
     delete[] sorted;
 }
 
-int* sort(int* array, int len) { // bubble sort
+int* sort(int* array, int len) { // selection sort
     int* out = new int[len];
     int* lowest = &array[0];
     for (int i = 0; i < len; i++) {
@@ -45,7 +45,7 @@ int* sort(int* array, int len) { // bubble sort
 
 int* r_binsearch_i(int* a, int v, int l) {
     PRINT_ARRAY(a, l);
-    int halfl = (l - 1) >> 1;
+    int halfl = ((l - 2) >> 1) + 1;
     if (l == 1 || a[halfl] == v) return a + halfl;
     return (a[halfl] > v ? r_binsearch_i(a, v, halfl) : r_binsearch_i(a + halfl + 1, v, halfl)); 
 }
