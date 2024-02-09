@@ -13,7 +13,7 @@ int main() {
 
     fraction f3 = f1 / f2;
 
-    fraction f4 = f3 * 2;
+    fraction f4 = f3 * (fraction)2;
 
     fraction f5 = f4 + f2;
 

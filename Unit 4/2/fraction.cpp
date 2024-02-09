@@ -78,13 +78,13 @@ void fraction::operator+=(fraction b) {
 }
 
 fraction fraction::operator-(fraction b) {
-    fraction f = ((*this) + b * -1);
+    fraction f = ((*this) + b * (fraction)-1);
     f.simplify();
     return f;
 }
 
 void fraction::operator-=(fraction b) {
-    *this += b * -1;
+    *this += b * (fraction)-1;
     simplify();
 }
 
