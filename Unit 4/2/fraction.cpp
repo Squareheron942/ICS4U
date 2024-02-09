@@ -30,7 +30,7 @@ fraction::fraction(long long num, long long denom) {
     simplify();
 }
 
-fraction::fraction(fraction& f) : num(f.num), denom(f.denom) {}
+// fraction::fraction(fraction& f) : num(f.num), denom(f.denom) {}
 
 void fraction::set_numerator(long long val) { num = val; simplify(); }
 

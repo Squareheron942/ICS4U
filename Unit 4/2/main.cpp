@@ -15,8 +15,14 @@ int main() {
 
     fraction f4 = f3 * 2;
 
+    fraction f5 = f4 + f2;
+
+    fraction f6 = f4 - f1;
+
     std::cout << (std::string)f1 << std::endl;
     std::cout << (std::string)f2 << std::endl;
     std::cout << (std::string)f3 << std::endl;
     std::cout << (std::string)f4 << std::endl;
+    std::cout << (std::string)f5 << std::endl;
+    std::cout << (std::string)f6 << std::endl;
 }

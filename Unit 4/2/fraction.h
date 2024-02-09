@@ -11,7 +11,7 @@ class fraction {
     public:
     fraction(long long num = 0);
     fraction(long long num, long long denom);
-    fraction::fraction(fraction& f);
+    // fraction(fraction& f);
 
     inline long long numerator() { return num; }
     inline long long denominator() { return denom; }
