@@ -101,3 +101,4 @@ void fraction::operator/=(fraction b) {
 }
 
 fraction::operator std::string() { return std::to_string(num) + "/" + std::to_string(denom); }
+fraction::operator long double() { return (long double)num / denom; }

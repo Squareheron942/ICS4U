@@ -30,4 +30,5 @@ class fraction {
     void operator/=(fraction b);
 
     operator std::string();
+    operator long double();
 };
